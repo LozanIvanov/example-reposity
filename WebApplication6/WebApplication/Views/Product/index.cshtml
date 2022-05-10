@@ -1,0 +1,38 @@
+﻿@model ProductsIndexViewModel;
+<div class="row">
+	<div class="col-12">
+		<a class="btn btn-outline-success" href="/Products/Create">Create</a>
+	</div>
+  <div class="col-12">
+	  <table class="table table-bordered">
+		  <tr>
+		  	<th>Name</th>
+		  	<th>Quantity</th>
+		  	<th>Price</th>
+		  	<th>Action</th>
+		  </tr>
+		  @foreach (var product in Model.Products)
+		  {
+	  <tr>
+	  	<td>@product.Name</td>
+	    <td>@product.Quantity</td>
+	    <td>@product.Price</td>
+		  <td>
+			  <a class="btn btn-warning" href="/Product/Edit/@product.Id">Edit</a>
+
+			  <form class="d-inline" method="post" action="/Products/Delete/@product.Id">
+				 <button class="btn btn-danger">Delete</button>
+			  </form>
+		  </td>
+	  </tr>
+
+		  }
+	  </table>
+	  <div>
+		  @for (int i = 1; i <= Model.TotalPages; i++)
+		  {
+          <a @(i==Model.CurrentPage ? "style=color:red;" :"") href="/Products?page=@i">@i</a>
+		  }
+	  </div>
+  </div>
+</div>
